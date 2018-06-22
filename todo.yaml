@@ -42,7 +42,16 @@ items:
           deploymentconfig: manawa-todo
       spec:
         containers:
-        - image: quay.io/adeo/manawa-todo:v6
+        - env:
+          - name: DATABASE_SERVICE_NAME
+            value: mongodb.adeo-demo-workshop.svc
+          - name: MONGODB_USER
+            value: mongodb
+          - name: MONGODB_PASSWORD
+            value: mongodb
+          - name: MONGODB_DATABASE
+            value: todolist
+          image:  quay.io/adeo/manawa-todo:v6
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

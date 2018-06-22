@@ -9,3 +9,5 @@ spec:
   to:
     kind: Service
     name: manawa-todo
+  tls:
+    termination: edge
