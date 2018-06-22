@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: manawa-todo
+  labels:
+      app: manawa-todo
+spec:
+  host: 
+  to:
+    kind: Service
+    name: manawa-todo
