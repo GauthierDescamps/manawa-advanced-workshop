@@ -10,4 +10,5 @@ spec:
     kind: Service
     name: manawa-todo
   tls:
+    insecureEdgeTerminationPolicy: Redirect
     termination: edge

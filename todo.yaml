@@ -15,7 +15,7 @@ items:
         openshift.io/imported-from: quay.io/adeo/manawa-todo
       from:
         kind: DockerImage
-        name: quay.io/adeo/manawa-todo:v6
+        name: quay.io/adeo/manawa-todo:v1
       generation: 2
       importPolicy: {}
       name: latest
@@ -44,14 +44,14 @@ items:
         containers:
         - env:
           - name: DATABASE_SERVICE_NAME
-            value: mongodb.adeo-demo-workshop.svc
+            value: mongodb
           - name: MONGODB_USER
             value: mongodb
           - name: MONGODB_PASSWORD
             value: mongodb
           - name: MONGODB_DATABASE
-            value: todolist
-          image:  quay.io/adeo/manawa-todo:v6
+            value: mongodb
+          image:  manawa-todo:latest
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

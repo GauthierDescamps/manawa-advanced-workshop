@@ -3,8 +3,6 @@ kind: Service
 metadata:
   annotations:
     description: Exposes and load balances the application pods
-    service.alpha.openshift.io/dependencies: '[{"name": "${DATABASE_SERVICE_NAME}",
-      "kind": "Service"}]'
   name: manawa-todo
   labels:
       app: manawa-todo
