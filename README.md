@@ -167,7 +167,7 @@ $ oc get hpa && oc get po && oc get dc
 
 1. Change imageStream manually :
 ```
-$ oc tag quay.io/adeo/manawa-todo:v1 manawa-todo:latest
+$ oc tag quay.io/adeo/manawa-todo:v2 manawa-todo:latest
 ```
 
 Also, you replace the existing image tag by a new one (remote).
