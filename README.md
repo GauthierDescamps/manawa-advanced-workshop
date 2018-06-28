@@ -63,27 +63,27 @@ oc new-project <PROJECT_NAME>
 
 2. Install MongoDB
 * From "Browse Catalog" 
-./Tutorial/screens/Home-Project.png
+![Home Project](./Tutorial/screens/Home-Project.png)
 
 
 * select "databases"
-./Tutorial/screens/Catalog-Select-Database.png
+![Select Database](./Tutorial/screens/Catalog-Select-Database.png)
 
 
 
 * then "MonogDB" ​
-./Tutorial/screens/Catalog-Select-MongoDB.png
+![Select Database](./Tutorial/screens/Catalog-Select-MongoDB.png)
 
 
 * On second screen, You must fill in the following fields :
 
-Database Service Name : mongodb
-MongoDB Connection Username : mongodb
-MongoDB Connection Password : mongodb
-MongoDB Database Name : mongodb
-MongoDB Admin Password : todolist
+> * Database Service Name : mongodb
+> * MongoDB Connection Username : mongodb
+> * MongoDB Connection Password : mongodb
+> * MongoDB Database Name : mongodb
+> * MongoDB Admin Password : todolist
 
-./Tutorial/screens/Catalog-Create-MongoDB.png
+![Create MongoDB](./Tutorial/screens/Catalog-Create-MongoDB.png)
 
 
 
