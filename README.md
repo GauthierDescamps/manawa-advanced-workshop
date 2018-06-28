@@ -36,6 +36,7 @@ wget https://github.com/openshift/origin/releases/download/v3.10.0-rc.0/openshif
 tar -xvzf openshift-origin-client-tools-v3.10.0-rc.0-c20e215-linux-64bit.tar.gz
 
 mv openshift-origin-client-tools-v3.10.0-rc.0-c20e215-linux-64bit/oc /usr/local/bin
+```
 
 
 ## Step 1 : Clone workshop-manawa-advanced from Github repo
