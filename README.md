@@ -74,7 +74,7 @@ oc new-project devweek-<your_ldap_id>-todolist
 
 
 
-* then "MonogDB" ​
+* then "MonogDB" 
 ![Select Database](./Tutorial/screens/Catalog-Select-MongoDB.png)
 
 
@@ -91,12 +91,12 @@ oc new-project devweek-<your_ldap_id>-todolist
 ## Deploy frontend application
 
 ```
-$ oc create -f todo.yaml ​
-imagestream "manawa-todo" created​
+$ oc create -f todo.yaml 
+imagestream "manawa-todo" created
 deploymentconfig "manawa-todo" create
 ```
 
-## Connect my Frontend application to Database​
+## Connect my Frontend application to Database
 
 ```
 $ oc set env dc/manawa-todo -e MONGODB_USER=mongodbuser -e MONGODB_PASSWORD=mongodbpass -e MONGODB_DATABASE=todolist -e DATABASE_SERVICE_NAME=mongodb.devweek-<LDAP>-todolist.svc
@@ -106,30 +106,30 @@ $ oc set env dc/manawa-todo -e MONGODB_USER=mongodbuser -e MONGODB_PASSWORD=mong
 
 1. expose the service to internal cluster
 ```
-$ oc create -f service.yml ​
+$ oc create -f service.yml 
 service "manawa-todo-service" created
 ```
 
 ## Expose my application to everyone with Public IP
 
-1. get the service to expose:​
+1. get the service to expose:
 
 ```
-$ oc get svc​
-NAME          CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE​
-manawa-todo-service   172.30.62.149   <none>        8080/TCP    25s​
-mongodb       172.30.178.29   <none>        27017/TCP   4h​
+$ oc get svc
+NAME          CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
+manawa-todo-service   172.30.62.149   <none>        8080/TCP    25s
+mongodb       172.30.178.29   <none>        27017/TCP   4h
 ```
-​
-2. create the route​
+
+2. create the route
 ```
-$ oc create route edge --service manawa-todo-service --port 8080​
+$ oc create route edge --service manawa-todo-service --port 8080
 or 
 $ oc create –f route.yaml
 ```
 
 
-3. Finaly, check:​
+3. Finaly, check:
 ```
 $ oc get routes
 ```
@@ -137,80 +137,80 @@ $ oc get routes
 Now test your application on https://manawa-todo-devweek-<LDAP>-todolist.euw1-gcp-poc.adeo.cloud
 
 ## Autoscale my application
-1. Set CPU and Memory limits on your deployment:​
+1. Set CPU and Memory limits on your deployment:
 ```
-$ oc set resources dc manawa-todo --limits=cpu=200m,memory=512Mi --requests=cpu=100m,memory=256Mi​
+$ oc set resources dc manawa-todo --limits=cpu=200m,memory=512Mi --requests=cpu=100m,memory=256Mi
 ```
-​
-2. Then, configure the auto-scaling:​
+
+2. Then, configure the auto-scaling:
 ```
-$ oc autoscale dc manawa-todo --min 1 --max 10 --cpu-percent=80​
+$ oc autoscale dc manawa-todo --min 1 --max 10 --cpu-percent=80
 ```
-​
-3. Check :​
+
+3. Check :
 ```
 $ oc get hpa
 ```
 
-4. Finally, launch an ab testing:​
+4. Finally, launch an ab testing:
 ```
-$ ab -n 1000 -c 5 https://manawa-todo-devweek-<LDAP>-todolist.euw1-gcp-poc.adeo.cloud/tasks​
+$ ab -n 10000 -c 20 https://manawa-todo-devweek-<LDAP>-todolist.euw1-gcp-poc.adeo.cloud/tasks
 ```
-​
-5. And now check hpa and pods:​
+
+5. And now check hpa and pods:
 ```
 $ oc get hpa && oc get po && oc get dc
 ```
 
 ## Change my application release (rolling update)
-​
 
-1. Change imageStream manually :​
-```
-$ oc tag quay.io/adeo/manawa-todo:v1 manawa-todo:latest​
-```
-​
-Also, you replace the existing image tag by a new one (remote).​
 
-​
-2. Check :​
+1. Change imageStream manually :
 ```
-$ oc rollout status  dc/manawa-todo​
+$ oc tag quay.io/adeo/manawa-todo:v1 manawa-todo:latest
+```
+
+Also, you replace the existing image tag by a new one (remote).
+
+
+2. Check :
+```
+$ oc rollout status  dc/manawa-todo
 $ oc get dc
 ```
 
-* Finally, check your new application release !:​
+* Finally, check your new application release !:
 https://manawa-todo-devweek-<LDAP>-todolist.euw1-gcp-poc.adeo.cloud
 
 ## Manage my application (log, rsh, debug)
 
-1. Check logs:​
+1. Check logs:
 ```
-$ oc get po​
-$ oc logs po/XXX​
+$ oc get po
+$ oc logs po/XXX
 ```
-​
 
-2. Go inside your pod:​
-```
-$ oc rsh po/XXX​
-```
-​
 
-3. Test those commands: ​
+2. Go inside your pod:
 ```
-$ oc describe <something>​
-$ oc export <something>​
-$ oc whoami –c|-t​
-$ oc get pv​
-$ oc get pvc​
+$ oc rsh po/XXX
+```
+
+
+3. Test those commands: 
+```
+$ oc describe <something>
+$ oc export <something>
+$ oc whoami –c|-t
+$ oc get pv
+$ oc get pvc
 ...
 ```
 
-## Remove my database​
+## Remove my database
 
-1. Delete your mongo database and check what is going on !​
+1. Delete your mongo database and check what is going on !
 ```
-$ oc get pods​
+$ oc get pods
 $ oc delete po/mongodb-X-XXXX
 ```
