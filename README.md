@@ -1,7 +1,7 @@
 # Workshop Manawa Advanced
 
-* SCM             : github (https://github.com)
-* PAAS            : https://manawa.euw1-gcp-poc.adeo.cloud/console/
+* SCM             : github (https://github.com/adeo/manawa-advanced-workshop.git)
+* Manawa            : https://manawa.euw1-gcp-poc.adeo.cloud/console/
 
 
 ## Prerequisite :
@@ -57,3 +57,37 @@ oc new-project <PROJECT_NAME>
 
 
 ## Step 4 : Create MongoDB  
+
+1. Connect to Web Console 
+* Point your browser to https://manawa.euw1-gcp-poc.adeo.cloud/ and login with ldap/password
+
+2. Install MongoDB
+* From "Browse Catalog" 
+./Tutorial/screens/Home-Project.png
+
+
+* select "databases"
+./Tutorial/screens/Catalog-Select-Database.png
+
+
+
+* then "MonogDB" ​
+./Tutorial/screens/Catalog-Select-MongoDB.png
+
+
+* On second screen, You must fill in the following fields :
+
+Database Service Name : mongodb
+MongoDB Connection Username : mongodb
+MongoDB Connection Password : mongodb
+MongoDB Database Name : mongodb
+MongoDB Admin Password : todolist
+
+./Tutorial/screens/Catalog-Create-MongoDB.png
+
+
+
+
+
+
+
