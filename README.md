@@ -134,7 +134,7 @@ $ oc create –f route.yaml
 $ oc get routes
 ```
 
-Now test your application on https://manawa-todo-devweek-<LDAP>-todolist.euw1-gcp-poc.adeo.cloud
+> * Now test your application on https://manawa-todo-devweek-<YOUR LDAP ID>-todolist.euw1-gcp-poc.adeo.cloud
 
 ## Autoscale my application
 1. Set CPU and Memory limits on your deployment:​
