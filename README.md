@@ -53,5 +53,7 @@ mv openshift-origin-client-tools-v3.10.0-rc.0-c20e215-linux-64bit/oc /usr/local/
 ```
 oc login -u <CLUSTER_USERNAME> -p <CLUSTER_PASSWORD> <CLUSTER_URL>
 oc new-project <PROJECT_NAME>
+```
+
 
 ## Step 4 : Create MongoDB  
