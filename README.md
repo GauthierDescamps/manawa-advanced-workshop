@@ -85,9 +85,55 @@ oc new-project <PROJECT_NAME>
 
 ![Create MongoDB](./Tutorial/screens/Catalog-Create-MongoDB.png)
 
+3.Deploy frontend application
 
+```
+$ oc create -f todo.yaml ​
+imagestream "manawa-todo" created​
+deploymentconfig "manawa-todo" create
+```
 
+4. Connect my Frontend application to Database​
 
+```
+oc set env dc/manawa-todo -e MONGODB_USER=mongodb -e MONGODB_PASSWORD=mongodb -e MONGODB_DATABASE=mongodb -e DATABASE_SERVICE_NAME=mongodb.devweek-<LDAP>-todolist.svc
+```
 
+5. Create service for my application
 
+*  expose the service to internal cluster
+```
+oc create -f service.yml ​
+service "manawa-todo" created
+```
 
+* Verify service 
+```
+$ oc get svc​
+NAME          CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE​
+manawa-todo   172.30.62.149   <none>        8080/TCP    25s​
+mongodb       172.30.178.29   <none>        27017/TCP   4h​
+```
+
+6. Expose my application to everyone on Public IP
+
+* get the service to expose:​
+
+```
+$ oc get svc​
+NAME          CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE​
+manawa-todo   172.30.62.149   <none>        8080/TCP    25s​
+mongodb       172.30.178.29   <none>        27017/TCP   4h​
+```
+​
+
+* create the route​
+```
+$ oc create route edge --service manawa-todo --port 8080​
+```
+​
+
+* Finaly, check:​
+```
+$ oc get routes
+```
