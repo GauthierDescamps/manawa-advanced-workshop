@@ -81,10 +81,10 @@ oc new-project devweek-<your_ldap_id>-todolist
 * On second screen, You must fill in the following fields :
 
 > * Database Service Name : mongodb
-> * MongoDB Connection Username : mongodb
-> * MongoDB Connection Password : mongodb
-> * MongoDB Database Name : mongodb
-> * MongoDB Admin Password : todolist
+> * MongoDB Connection Username : mongodbuser
+> * MongoDB Connection Password : mongodbpass
+> * MongoDB Database Name : todolist
+> * MongoDB Admin Password : *********
 
 ![Create MongoDB](./Tutorial/screens/Catalog-Create-MongoDB.png)
 
@@ -99,45 +99,42 @@ deploymentconfig "manawa-todo" create
 ## Connect my Frontend application to Database​
 
 ```
-oc set env dc/manawa-todo -e MONGODB_USER=mongodb -e MONGODB_PASSWORD=mongodb -e MONGODB_DATABASE=mongodb -e DATABASE_SERVICE_NAME=mongodb.devweek-<LDAP>-todolist.svc
+$ oc set env dc/manawa-todo -e MONGODB_USER=mongodbuser -e MONGODB_PASSWORD=mongodbpass -e MONGODB_DATABASE=todolist -e DATABASE_SERVICE_NAME=mongodb.devweek-<LDAP>-todolist.svc
 ```
 
-## Create service for my application
+## Expose my application to internal cluster with Private IP
 
 1. expose the service to internal cluster
 ```
-oc create -f service.yml ​
-service "manawa-todo" created
+$ oc create -f service.yml ​
+service "manawa-todo-service" created
 ```
 
-2. Verify service 
-```
-$ oc get svc​
-NAME          CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE​
-manawa-todo   172.30.62.149   <none>        8080/TCP    25s​
-mongodb       172.30.178.29   <none>        27017/TCP   4h​
-```
-
-## Expose my application to everyone on Public IP
+## Expose my application to everyone with Public IP
 
 1. get the service to expose:​
 
 ```
 $ oc get svc​
 NAME          CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE​
-manawa-todo   172.30.62.149   <none>        8080/TCP    25s​
+manawa-todo-service   172.30.62.149   <none>        8080/TCP    25s​
 mongodb       172.30.178.29   <none>        27017/TCP   4h​
 ```
 ​
 2. create the route​
 ```
-$ oc create route edge --service manawa-todo --port 8080​
+$ oc create route edge --service manawa-todo-service --port 8080​
+or 
+$ oc create –f route.yaml
 ```
+
 
 3. Finaly, check:​
 ```
 $ oc get routes
 ```
+
+Now test your application on https://manawa-todo-devweek-<LDAP>-todolist.euw1-gcp-poc.adeo.cloud
 
 ## Autoscale my application
 1. Set CPU and Memory limits on your deployment:​

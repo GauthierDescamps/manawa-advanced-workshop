@@ -8,7 +8,7 @@ spec:
   host: 
   to:
     kind: Service
-    name: manawa-todo
+    name: manawa-todo-service
   tls:
     insecureEdgeTerminationPolicy: Redirect
     termination: edge
