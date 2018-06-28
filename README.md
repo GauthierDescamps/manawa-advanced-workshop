@@ -126,14 +126,91 @@ manawa-todo   172.30.62.149   <none>        8080/TCP    25s​
 mongodb       172.30.178.29   <none>        27017/TCP   4h​
 ```
 ​
-
 * create the route​
 ```
 $ oc create route edge --service manawa-todo --port 8080​
 ```
-​
 
 * Finaly, check:​
 ```
 $ oc get routes
+```
+
+7. Autoscale my application
+* First, set CPU and Memory limits on your deployment:​
+```
+$ oc set resources dc manawa-todo --limits=cpu=200m,memory=512Mi --requests=cpu=100m,memory=256Mi​
+```
+​
+* Then, configure the auto-scaling:​
+```
+$ oc autoscale dc manawa-todo --min 1 --max 10 --cpu-percent=80​
+```
+​
+* Check :​
+```
+$ oc get hpa
+```
+
+* Finally, launch an ab testing:​
+```
+$ ab -n 1000 -c 5 https://manawa-todo-devweek-<LDAP>-todolist.euw1-gcp-poc.adeo.cloud/tasks​
+```
+​
+* And now check hpa and pods:​
+```
+$ oc get hpa && oc get po && oc get dc
+```
+
+8. Change my application release (rolling update)
+​
+
+* Change imageStream manually :​
+```
+$ oc tag quay.io/adeo/manawa-todo:v1 manawa-todo:latest​
+```
+​
+Also, you replace the existing image tag by a new one (remote).​
+
+​
+* Check :​
+```
+$ oc rollout status  dc/manawa-todo​
+$ oc get dc
+```
+
+* Finally, check your new application release !:​
+https://manawa-todo-devweek-<LDAP>-todolist.euw1-gcp-poc.adeo.cloud
+
+9. Manage my application (log, rsh, debug)
+
+* Check logs:​
+```
+$ oc get po​
+$ oc logs po/XXX​
+```
+​
+
+* Go inside your pod:​
+```
+$ oc rsh po/XXX​
+```
+​
+
+* Test those commands: ​
+```
+$ oc describe <something>​
+$ oc export <something>​
+$ oc whoami –c|-t​
+$ oc get pv​
+$ oc get pvc​
+...
+```
+
+9. Remove my database​
+
+* Delete your mongo database and check what is going on !​
+```
+$ oc get pods​
+$ oc delete po/mongodb-X-XXXX
 ```
