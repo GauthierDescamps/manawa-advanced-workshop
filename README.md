@@ -135,6 +135,14 @@ $ oc get routes
 ```
 
 > * Now test your application on https://manawa-todo-devweek-<YOUR LDAP ID>-todolist.euw1-gcp-poc.adeo.cloud
+> * Normaly connection to database failed... 
+
+## Connect my Frontend application to Database
+
+```
+$ oc set env dc/manawa-todo -e MONGODB_USER=mongodbuser -e MONGODB_PASSWORD=mongodbpass -e MONGODB_DATABASE=todolist -e DATABASE_SERVICE_NAME=mongodb.devweek-<LDAP>-todolist.svc
+```
+
 
 ## Autoscale my application
 1. Set CPU and Memory limits on your deployment:

@@ -44,13 +44,13 @@ items:
         containers:
         - env:
           - name: DATABASE_SERVICE_NAME
-            value: mongodb
+            value: xxxx
           - name: MONGODB_USER
-            value: mongodb
+            value: xxxx
           - name: MONGODB_PASSWORD
-            value: mongodb
+            value: xxxx
           - name: MONGODB_DATABASE
-            value: mongodb
+            value: xxxxx
           image:  manawa-todo:latest
           imagePullPolicy: Always
           livenessProbe:
@@ -60,9 +60,9 @@ items:
               port: 8080
               scheme: HTTP
             initialDelaySeconds: 22
-            periodSeconds: 10
+            periodSeconds: 5
             successThreshold: 1
-            timeoutSeconds: 10
+            timeoutSeconds: 5
           name: manawa-todo
           ports:
           - containerPort: 8080
@@ -76,9 +76,9 @@ items:
               port: 8080
               scheme: HTTP
             initialDelaySeconds: 27
-            periodSeconds: 10
+            periodSeconds: 5
             successThreshold: 1
-            timeoutSeconds: 10
+            timeoutSeconds: 5
           resources:
             limits:
               cpu: "1"
