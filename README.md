@@ -74,7 +74,7 @@ oc new-project devweek-<your_ldap_id>-todolist
 
 
 
-* then "MonogDB" 
+* then "MongoDB" 
 ![Select Database](./Tutorial/screens/Catalog-Select-MongoDB.png)
 
 
